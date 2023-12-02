@@ -5,10 +5,10 @@ public class Compte {
     private String nomDuCompte;
     private String typeDeCompte;
     private double montantDeDepart;
-    private String devise;
+    private Devise devise;
 
     // constructeur
-    public Compte(int idCompte, String nomDuCompte, String typeDeCompte, double montantDeDepart, String devise) {
+    public Compte(int idCompte, String nomDuCompte, String typeDeCompte, double montantDeDepart, Devise devise) {
         this.idCompte = idCompte;
         this.nomDuCompte = nomDuCompte;
         this.typeDeCompte = typeDeCompte;
@@ -50,11 +50,11 @@ public class Compte {
         this.montantDeDepart = montantDeDepart;
     }
 
-    public String getDevise() {
+    public Devise getDevise() {
         return devise;
     }
 
-    public void setDevise(String devise) {
+    public void setDevise(Devise devise) {
         this.devise = devise;
     }
 
