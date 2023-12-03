@@ -26,7 +26,7 @@ public class ConnectionDB {
         }
         return connection;
     }
-    //singleton connection
+    //  singleton connection
     public static ConnectionDB getConnection(){
         if(instance==null)
             instance=new ConnectionDB();

@@ -1,19 +1,26 @@
+import Repository.CompteCrudOperation;
 import Repository.ConnectionDB;
+import entity.Compte;
+import entity.Devise;
+
+import java.util.List;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Entrée with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-        ConnectionDB.getConnection().getConnectionInstance();
-        // Press Ctrl+F5 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        CompteCrudOperation compteCrudOperation=new CompteCrudOperation();
 
-            // Press Alt+F5 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing F9.
-            System.out.println("i = " + i);
-        }
+       List<Compte> comptes= compteCrudOperation.findAll();
+       for(Compte compte:comptes){
+           System.out.println(compte);
+       }
+        System.out.println(compteCrudOperation.findById(2));
+       Compte compte=new Compte(5,"Test5","espece",
+               300,new Devise(2));
+       compteCrudOperation.save(compte);
+       Compte compteToUpdate=new Compte(5,"updatedAccount","espece",
+               300,new Devise(2));
+        System.out.println(compteCrudOperation.update(compteToUpdate));
     }
 }

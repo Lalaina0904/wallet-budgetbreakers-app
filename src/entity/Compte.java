@@ -46,6 +46,10 @@ public class Compte {
         return montantDeDepart;
     }
 
+    public int getIdCompte() {
+        return idCompte;
+    }
+
     public void setMontantDeDepart(double montantDeDepart) {
         this.montantDeDepart = montantDeDepart;
     }
