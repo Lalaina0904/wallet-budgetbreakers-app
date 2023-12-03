@@ -1,0 +1,170 @@
+openapi: '3.0.2'
+info:
+  title: BudgetBacker
+  version: '1.2.0'
+  description: 'STD2095 STD22113'
+servers:
+  - url: https://api.server.test/v1
+tags:
+  - name: Account
+    description: account operation
+  - name: Currency
+    description: currency operation 
+  - name: Transaction
+    description: transaction operation
+paths:
+  /Account:
+    get:
+      tags:
+        - "Account"
+      summary: return all accounts 
+      description: all accounts
+      
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        idAccount:
+          type: string
+        accountName:
+          type: string
+        accountType:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+          
+            
+    Currency:
+      type: object
+      properties:
+        idCurrency:
+          type: string
+        code:
+          type: string
+        name: 
+          type: string
+    Transaction:
+      type: object
+      properties:
+        idTransacton: 
+          type: string
+        amount: 
+          type: number
+        
+        transactionDate:
+          type: string
+          format: date
+
+        category:
+          type: string
+    responseStatus:
+      type: object
+      properties:
+        schema: 
+            type: object
+            properties:
+               
+                  code:
+                    
+                    type: integer
+                    example: 200
+                    
+                  message: 
+                    type: string
+                    example: OK
+    responseBodyTemplate:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/responseStatus'
+        body:
+          type: object
+    successResponseAccount:
+      allOf:
+        - $ref: '#/components/schemas/responseBodyTemplate'
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: '#/components/schemas/Account'
+    successCurrencyResponse:
+      allOf:
+        - $ref: '#/components/schemas/responseBodyTemplate'
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: '#/components/schemas/Currency'
+    successTransactionResponse:
+      allOf:
+        - $ref: '#/components/schemas/responseBodyTemplate'
+        - properties:
+            body:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transaction'
+    badRequest:
+      allOf:
+        - $ref: '#/components/schemas/responseBodyTemplate'
+        - example:
+            status:
+              code: 400
+              message: bad request
+            body: {}
+    forbidden:
+      allOf:
+        - $ref: '#/components/schemas/responseBodyTemplate'
+        - example:
+            status:
+              code: 403
+              message: Forbiedden
+            body: {}
+    ServerError:
+      allOf:
+        - $ref: '#/components/schemas/responseBodyTemplate'
+        - example:
+            status:
+              code: 500
+              message: internal server error
+            body: {}
+  responses:
+    AccountList200:
+      description: list of accounts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/successResponseAccount'
+    CurrencyList200:
+      description: list of currency
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/successTransactionResponse'
+    TransactionList200:
+      description: list of transaction
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/successResponseAccount'
+    400:
+      description: bad request 
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/badRequest'
+    403:
+      description: forbidden 
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    500:
+      description: server error 
+      content:
+        application/json:
+          schema: 
+            $ref: '#/components/schemas/ServerError'
