@@ -18,11 +18,253 @@ paths:
       tags:
         - "Account"
       summary: return all accounts 
-      description: all accounts
-      
+      description: get  all existing accounts
+      parameters:
+        - $ref: '#/components/parameters/queryPage'
       responses:
-        '200':
-          description: OK
+        200:
+          $ref: '#/components/responses/AccountList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    post: 
+      tags:
+        - "Account"
+      summary: add  account 
+      description: create a new account 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Account'
+      responses:
+        200:
+         $ref: '#/components/responses/AccountList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    put: 
+      tags:
+        - "Account"
+      summary: return an updated account 
+      description: update an account by its 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Account'
+      responses:
+        200:
+         $ref: '#/components/responses/AccountList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /Account/{id}: 
+    get:
+      tags:
+        - "Account"
+      summary: return an account
+      description: find an account by its id 
+      parameters:
+        - in: path
+          name: id 
+          description: id of the account 
+          required: true 
+          schema:
+            type: string 
+      responses:
+        200:
+         $ref: '#/components/responses/AccountList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+   
+  /Currency:
+    get: 
+      tags:
+        - "Currency"
+      summary: retur all currency 
+      description: find all existing currency 
+      parameters:
+        - $ref: '#/components/parameters/queryPage'
+      responses:
+        200:
+          $ref: '#/components/responses/CurrencyList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    post:  
+      tags:
+        - "Currency"
+      summary: add currency 
+      description: add  new currency 
+      requestBody: 
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/Currency'
+      responses:
+        200:
+          $ref: '#/components/responses/CurrencyList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    put:  
+      tags:
+        - "Currency"
+      summary: update currency  
+      description: update a  currency 
+      requestBody: 
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/Currency'
+      responses:
+        200:
+          $ref: '#/components/responses/CurrencyList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /Currency/{idCurrency}: 
+    get:
+      tags:
+        - "Currency"
+      summary: return currency by id 
+      description: find currency by id 
+      parameters:
+        - in: path
+          name: idCurrency 
+          description: id of currency
+          required: true 
+          schema:
+            type: string 
+      responses:
+        200:
+          $ref: '#/components/responses/CurrencyList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /Transaction:
+    get: 
+      tags:
+        - "Transaction"
+      summary: return all transaction 
+      description: find all existing transaction 
+      parameters:
+        - $ref: '#/components/parameters/queryPage'
+      responses:
+        
+        200:
+          $ref: '#/components/responses/TransactionList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    post: 
+      tags:
+        - "Transaction" 
+      summary: add new transaction 
+      description: add new transaction 
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/Transaction'
+
+      responses:
+        
+        200:
+          $ref: '#/components/responses/TransactionList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+    put: 
+      tags:
+        - "Transaction" 
+      summary: return updated transaction 
+      description: update a transaction 
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/Transaction'
+
+      responses:
+        
+        200:
+          $ref: '#/components/responses/TransactionList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+  /Transaction/{idTransaction}: 
+    get: 
+      tags:
+        - "Transaction"
+      summary: return one transaction by id²
+      description: find transaction by id 
+      parameters:
+        - in: path 
+          name: idTransaction 
+          description: id of transaction 
+          required: true 
+          schema: 
+            type: string 
+      responses:
+        
+        200:
+          $ref: '#/components/responses/TransactionList200'
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+
+
 components:
   schemas:
     Account:
@@ -131,7 +373,24 @@ components:
               code: 500
               message: internal server error
             body: {}
+  parameters:
+    queryPage:
+      name: queryPagination
+      in: query
+      description: pagination using the query
+      required: false
+      schema:
+        type: object
+        properties:
+          page: 
+            type: integer
+            default: 1
+          pageSize:
+            type: integer
+            default: 50
+    
   responses:
+    
     AccountList200:
       description: list of accounts
       content:
