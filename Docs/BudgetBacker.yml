@@ -296,7 +296,9 @@ components:
           type: string
         amount: 
           type: number
-        
+        account: 
+          $ref: '#/components/schemas/Account'
+
         transactionDate:
           type: string
           format: date
@@ -402,13 +404,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/successTransactionResponse'
+            $ref: '#/components/schemas/successCurrencyResponse'
     TransactionList200:
       description: list of transaction
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/successResponseAccount'
+            $ref: '#/components/schemas/successTransactionResponse'
     400:
       description: bad request 
       content:
