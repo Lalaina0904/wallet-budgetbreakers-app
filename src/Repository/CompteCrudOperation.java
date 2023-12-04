@@ -96,20 +96,11 @@ public class CompteCrudOperation implements CrudOperation<Compte> {
 
     @Override
     public List<Compte> saveAll(List<Compte> toSave) {
-        String sql="INSERT INTO compte VALUES" +
-                "(?,?,?,?,?) ON CONFLICT DO NOTHING";
+
         try{
-            PreparedStatement preparedStatement=ConnectionDB.getConnection()
-                    .getConnectionInstance().prepareStatement(sql);
-           for(Compte compte : toSave){
-               preparedStatement.setInt(1,compte.getIdCompte());
-               preparedStatement.setString(2,compte.getNomDuCompte());
-               preparedStatement.setString(3,compte.getTypeDeCompte());
-               preparedStatement.setDouble(4,compte.getMontantDeDepart());
-               preparedStatement.setInt(5,compte.getDevise().getId_devise());
-               preparedStatement.addBatch();
+            for(Compte compte : toSave){
+            save(compte);
            }
-            int rows[]=preparedStatement.executeBatch();
             System.out.println("inserted succefully");
         }catch (Exception e){
             e.printStackTrace();

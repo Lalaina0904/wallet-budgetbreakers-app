@@ -108,6 +108,7 @@ public class DeviseCrudOperation implements CrudOperation<Devise> {
                     .getConnection().getConnectionInstance().prepareStatement(sql);
             preparedStatement.setString(1,toUpdate.getNom());
             preparedStatement.setString(2,toUpdate.getCode_iso());
+            preparedStatement.setInt(3,toUpdate.getId_devise());
 
             preparedStatement.executeUpdate();
         }catch (Exception e){

@@ -10,7 +10,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         CompteCrudOperation compteCrudOperation=new CompteCrudOperation();
-
+        //
        List<Compte> comptes= compteCrudOperation.findAll();
        for(Compte compte:comptes){
            System.out.println(compte);
