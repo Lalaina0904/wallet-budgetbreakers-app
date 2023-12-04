@@ -1,6 +1,6 @@
 package entity;
 
-public class Compte {
+public class Account {
     private int idCompte;
     private String nomDuCompte;
     private String typeDeCompte;
@@ -8,7 +8,7 @@ public class Compte {
     private Devise devise;
 
     // constructeur
-    public Compte(int idCompte, String nomDuCompte, String typeDeCompte, double montantDeDepart, Devise devise) {
+    public Account(int idCompte, String nomDuCompte, String typeDeCompte, double montantDeDepart, Devise devise) {
         this.idCompte = idCompte;
         this.nomDuCompte = nomDuCompte;
         this.typeDeCompte = typeDeCompte;
