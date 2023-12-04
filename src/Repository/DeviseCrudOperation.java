@@ -1,26 +1,25 @@
 package Repository;
 
-import entity.Devise;
+import entity.Currency;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeviseCrudOperation implements CrudOperation<Devise> {
+public class DeviseCrudOperation implements CrudOperation<Currency> {
 
 
-    public List<Devise> findAll() {
+    public List<Currency> findAll() {
         String sql="select * from devise ";
-        List <Devise> devises=new ArrayList<>();
+        List <Currency> currencies =new ArrayList<>();
         try {
             PreparedStatement preparedStatement= ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
             ResultSet resultSet=preparedStatement.executeQuery();
             while (resultSet.next()){
-                devises.add(
-                        new Devise(
+                currencies.add(
+                        new Currency(
                                 resultSet.getInt("id_devise"),
                                 resultSet.getString("nom_devise"),
                                 resultSet.getString("code_iso")
@@ -32,13 +31,13 @@ public class DeviseCrudOperation implements CrudOperation<Devise> {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return devises;
+        return currencies;
     }
 
     @Override
-    public Devise findById(int id) {
+    public Currency findById(int id) {
         String sql="select * from devise where id_devise=?";
-        Devise devise=null;
+        Currency currency =null;
         try {
             PreparedStatement preparedStatement= ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
@@ -46,7 +45,7 @@ public class DeviseCrudOperation implements CrudOperation<Devise> {
             ResultSet resultSet=preparedStatement.executeQuery();
             while (resultSet.next()){
 
-                        new Devise(
+                        new Currency(
                                 resultSet.getInt("id_devise"),
                                 resultSet.getString("nom_devise"),
                                 resultSet.getString("code_iso")
@@ -57,19 +56,19 @@ public class DeviseCrudOperation implements CrudOperation<Devise> {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return devise;
+        return currency;
     }
 
     @Override
-    public Devise save(Devise toSave) {
+    public Currency save(Currency toSave) {
         String sql="INSERT INTO devise VALUES" +
                 "(?,?,?) ON CONFLICT DO NOTHING";
         try{
             PreparedStatement preparedStatement=ConnectionDB.getConnection()
                     .getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setInt(1,toSave.getId_devise());
-            preparedStatement.setString(2,toSave.getNom());
-            preparedStatement.setString(3,toSave.getCode_iso());
+            preparedStatement.setInt(1,toSave.getIdCurrency());
+            preparedStatement.setString(2,toSave.getName());
+            preparedStatement.setString(3,toSave.getCode());
 
             int rows=preparedStatement.executeUpdate();
             System.out.println(rows>0 ? "inserted succefully" : "this currency already exists");
@@ -80,16 +79,16 @@ public class DeviseCrudOperation implements CrudOperation<Devise> {
     }
 
     @Override
-    public List<Devise> saveAll(List<Devise> toSave) {
+    public List<Currency> saveAll(List<Currency> toSave) {
         String sql="INSERT INTO devise VALUES" +
                 "(?,?,?) ON CONFLICT DO NOTHING";
         try{
             PreparedStatement preparedStatement=ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
-           for (Devise devise:toSave){
-               preparedStatement.setInt(1,devise.getId_devise());
-               preparedStatement.setString(2,devise.getNom());
-               preparedStatement.setString(3,devise.getCode_iso());
+           for (Currency currency :toSave){
+               preparedStatement.setInt(1, currency.getIdCurrency());
+               preparedStatement.setString(2, currency.getName());
+               preparedStatement.setString(3, currency.getCode());
                preparedStatement.addBatch();
            }
           int rows[]= preparedStatement.executeBatch();
@@ -101,20 +100,20 @@ public class DeviseCrudOperation implements CrudOperation<Devise> {
     }
 
     @Override
-    public Devise update(Devise toUpdate) {
+    public Currency update(Currency toUpdate) {
         String sql="update devise set nom_devise=?,code_iso=? where id_devise=?";
         try {
             PreparedStatement preparedStatement=ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setString(1,toUpdate.getNom());
-            preparedStatement.setString(2,toUpdate.getCode_iso());
-            preparedStatement.setInt(3,toUpdate.getId_devise());
+            preparedStatement.setString(1,toUpdate.getName());
+            preparedStatement.setString(2,toUpdate.getCode());
+            preparedStatement.setInt(3,toUpdate.getIdCurrency());
 
             preparedStatement.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return findById(toUpdate.getId_devise());
+        return findById(toUpdate.getIdCurrency());
     }
 }

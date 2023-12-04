@@ -1,7 +1,5 @@
 package Repository;
 
-import entity.Compte;
-
 import java.util.List;
 
 public interface CrudOperation <T> {

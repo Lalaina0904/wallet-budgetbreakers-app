@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompteCrudOperation implements CrudOperation<Account> {
+public class AccountCrudOperation implements CrudOperation<Account> {
 
     @Override
     public List<Account> findAll() {
@@ -81,13 +81,12 @@ public class CompteCrudOperation implements CrudOperation<Account> {
         try{
             PreparedStatement preparedStatement=ConnectionDB.getConnection()
                     .getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setInt(1, account.getIdCompte());
-            preparedStatement.setString(2, account.getNomDuCompte());
-            preparedStatement.setString(3, account.getTypeDeCompte());
-            preparedStatement.setDouble(4, account.getMontantDeDepart());
-            preparedStatement.setInt(5, account.getDevise().getId_devise());
+            preparedStatement.setInt(1, account.getIdAccount());
+            preparedStatement.setString(2, account.getAccountName());
+            preparedStatement.setString(3, account.getAccountType());
+            preparedStatement.setDouble(4, account.getInitialAmount());
+            preparedStatement.setInt(5, account.getCurrency().getIdCurrency());
             int rows=preparedStatement.executeUpdate();
-            System.out.println(rows>0 ? "inserted succefully" : "this compte already exists");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -101,7 +100,6 @@ public class CompteCrudOperation implements CrudOperation<Account> {
             for(Account account : toSave){
             save(account);
            }
-            System.out.println("inserted succefully");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -114,15 +112,15 @@ public class CompteCrudOperation implements CrudOperation<Account> {
         try {
             PreparedStatement preparedStatement=ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setString(1,toUpdate.getNomDuCompte());
-            preparedStatement.setString(2,toUpdate.getTypeDeCompte());
-            preparedStatement.setInt(3,toUpdate.getDevise().getId_devise());
-            preparedStatement.setInt(4,toUpdate.getIdCompte());
+            preparedStatement.setString(1,toUpdate.getAccountName());
+            preparedStatement.setString(2,toUpdate.getAccountType());
+            preparedStatement.setInt(3,toUpdate.getCurrency().getIdCurrency());
+            preparedStatement.setInt(4,toUpdate.getIdAccount());
             preparedStatement.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return findById(toUpdate.getIdCompte());
+        return findById(toUpdate.getIdAccount());
     }
 }

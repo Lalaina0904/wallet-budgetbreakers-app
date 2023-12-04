@@ -1,6 +1,5 @@
 package Repository;
 
-import entity.Devise;
 import entity.Transaction;
 
 import java.sql.PreparedStatement;
@@ -13,7 +12,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
     public List<Transaction> findAll() {
         String sql="select * from Transaction ";
         List <Transaction> Transactions=new ArrayList<>();
-        CompteCrudOperation compte=new CompteCrudOperation();
+        AccountCrudOperation account=new AccountCrudOperation();
         try {
             PreparedStatement preparedStatement= ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
@@ -23,7 +22,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
                         new Transaction(
                               resultSet.getInt("id"),
                                 resultSet.getString("type"),
-                                compte.findById(resultSet.getInt("compte_id")),
+                                account.findById(resultSet.getInt("compte_id")),
                                 resultSet.getDouble("montant"),
                                 resultSet.getString("categorie"),
                                 resultSet.getDate("date"),
@@ -43,7 +42,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
     public Transaction findById(int id) {
         String sql="select * from Transaction ";
         Transaction transaction=null;
-        CompteCrudOperation compte=new CompteCrudOperation();
+        AccountCrudOperation account=new AccountCrudOperation();
         try {
             PreparedStatement preparedStatement= ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
@@ -53,7 +52,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
                 transaction=new Transaction(
                                 resultSet.getInt("id"),
                                 resultSet.getString("type"),
-                                compte.findById(resultSet.getInt("compte_id")),
+                                account.findById(resultSet.getInt("compte_id")),
                                 resultSet.getDouble("montant"),
                                 resultSet.getString("categorie"),
                                 resultSet.getDate("date"),
@@ -79,9 +78,9 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
                     .getConnectionInstance().prepareStatement(sql);
            preparedStatement.setInt(1,toSave.getId());
            preparedStatement.setString(2,toSave.getType());
-           preparedStatement.setInt(3,toSave.getCompte().getIdCompte());
-           preparedStatement.setDouble(4,toSave.getMontant());
-           preparedStatement.setString(5,toSave.getCategorie());
+           preparedStatement.setInt(3,toSave.getAccount().getIdAccount());
+           preparedStatement.setDouble(4,toSave.getAmount());
+           preparedStatement.setString(5,toSave.getCategory());
            preparedStatement.setDate(6,toSave.getDate());
            preparedStatement.setTime(7,toSave.getHour());
 
@@ -110,8 +109,8 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
             PreparedStatement preparedStatement=ConnectionDB
                     .getConnection().getConnectionInstance().prepareStatement(sql);
             preparedStatement.setString(1,toUpdate.getType());
-            preparedStatement.setDouble(2,toUpdate.getMontant());
-            preparedStatement.setString(3,toUpdate.getCategorie());
+            preparedStatement.setDouble(2,toUpdate.getAmount());
+            preparedStatement.setString(3,toUpdate.getCategory());
             preparedStatement.setInt(4,toUpdate.getId());
 
             preparedStatement.executeUpdate();

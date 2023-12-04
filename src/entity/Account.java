@@ -1,76 +1,54 @@
 package entity;
 
 public class Account {
-    private int idCompte;
-    private String nomDuCompte;
-    private String typeDeCompte;
-    private double montantDeDepart;
-    private Devise devise;
+    private int idAccount;
+    private String accountName;
+    private String accountType;
+    private double initialAmount;
+    private Currency currency;
 
     // constructeur
-    public Account(int idCompte, String nomDuCompte, String typeDeCompte, double montantDeDepart, Devise devise) {
-        this.idCompte = idCompte;
-        this.nomDuCompte = nomDuCompte;
-        this.typeDeCompte = typeDeCompte;
-        this.montantDeDepart = montantDeDepart;
-        this.devise = devise;
+
+    public Account(int idAccount, String accountName, String accountType, double initialAmount, Currency currency) {
+        this.idAccount = idAccount;
+        this.accountName = accountName;
+        this.accountType = accountType;
+        this.initialAmount = initialAmount;
+        this.currency = currency;
     }
+
 
     // getters et setters
 
-    public int getId() {
-        return idCompte;
+
+    public int getIdAccount() {
+        return idAccount;
     }
 
-    public void setId(int idCompte) {
-        this.idCompte = idCompte;
+    public String getAccountName() {
+        return accountName;
     }
 
-    public String getNomDuCompte() {
-        return nomDuCompte;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setNomDuCompte(String nomDuCompte) {
-        this.nomDuCompte = nomDuCompte;
+    public double getInitialAmount() {
+        return initialAmount;
     }
 
-    public String getTypeDeCompte() {
-        return typeDeCompte;
+    public Currency getCurrency() {
+        return currency;
     }
 
-    public void setTypeDeCompte(String typeDeCompte) {
-        this.typeDeCompte = typeDeCompte;
-    }
-
-    public double getMontantDeDepart() {
-        return montantDeDepart;
-    }
-
-    public int getIdCompte() {
-        return idCompte;
-    }
-
-    public void setMontantDeDepart(double montantDeDepart) {
-        this.montantDeDepart = montantDeDepart;
-    }
-
-    public Devise getDevise() {
-        return devise;
-    }
-
-    public void setDevise(Devise devise) {
-        this.devise = devise;
-    }
-
-    // toString -- pour afficher les informations d'un compte au format String
     @Override
     public String toString() {
-        return "Compte{" +
-                "id=" + idCompte +
-                ", nomDuCompte='" + nomDuCompte + '\'' +
-                ", typeDeCompte='" + typeDeCompte + '\'' +
-                ", montantDeDepart=" + montantDeDepart +
-                ", devise='" + devise + '\'' +
+        return "Account{" +
+                "idAccount=" + idAccount +
+                ", accountName='" + accountName + '\'' +
+                ", accountType='" + accountType + '\'' +
+                ", initialAmount=" + initialAmount +
+                ", currency=" + currency +
                 '}';
     }
 }
