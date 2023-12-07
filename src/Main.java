@@ -1,15 +1,8 @@
-import Repository.AccountCrudOperation;
-import Repository.DeviseCrudOperation;
-import Repository.TransactionCrudOperation;
-import Service.TransactionService;
+import Fonctionnality.BalanceHistory;
+import Fonctionnality.TransactionAccount;
 import entity.Account;
-import entity.Currency;
-import entity.Transaction;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDateTime;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -84,8 +77,12 @@ public class Main {
                 "epargne", java.sql.Date.valueOf("2023-12-04"),java.sql.Time.valueOf("20:45:00")));
 
         System.out.println(transactionToUpdate);*/
-        TransactionService service=new TransactionService();
+        TransactionAccount service=new TransactionAccount();
        Account account= service.performTransaction(10,"investissement", 3000.0,"credit",1);
         System.out.println(account);
+
+        BalanceHistory balanceHistory=new BalanceHistory();
+        LocalDateTime dateTime= LocalDateTime.of(2023,12,6,6,30);
+        System.out.println(balanceHistory.getSoldByDate(2,dateTime));
     }
 }
