@@ -1,66 +1,74 @@
 package entity;
 
+
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
+
 
 public class Transaction {
     private int id;
-    private String type;
-    private Account account;
+    private String label;
     private double amount;
+    LocalDateTime Date;
+    private String type;
 
-    private String category;
-    private Date date;
-    private Time hour;
-
-    public Transaction(int id, String type, Account account, double amount, String category, Date date, Time hour) {
+    public Transaction(int id, String label, double amount, LocalDateTime date, String type) {
         this.id = id;
-        this.type = type;
-        this.account = account;
+        this.label = label;
         this.amount = amount;
-        this.category = category;
-        this.date = date;
-        this.hour = hour;
+        Date = date;
+        this.type = type;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public Account getAccount() {
-        return account;
+    public String getLabel() {
+        return label;
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public String getCategory() {
-        return category;
+    public LocalDateTime getDate() {
+        return Date;
     }
 
-    public Date getDate() {
-        return date;
+    public String getType() {
+        return type;
     }
 
-    public Time getHour() {
-        return hour;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setDate(LocalDateTime date) {
+        Date = date;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
-                ", account=" + account +
+                ", label='" + label + '\'' +
                 ", amount=" + amount +
-                ", category='" + category + '\'' +
-                ", date=" + date +
-                ", hour=" + hour +
+                ", Date=" + Date +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

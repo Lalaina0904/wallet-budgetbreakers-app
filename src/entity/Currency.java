@@ -1,21 +1,21 @@
 package entity;
 
+
+
+
 public class Currency {
-    int idCurrency;
+    int id;
     String name;
     String code;
 
-    public Currency(int idCurrency, String name, String code) {
-        this.idCurrency = idCurrency;
+    public Currency(int id, String name, String code) {
+        this.id = id;
         this.name = name;
         this.code = code;
     }
-    public Currency(int idCurrency) {
-        this.idCurrency = idCurrency;
 
-    }
-    public int getIdCurrency() {
-        return idCurrency;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -26,10 +26,22 @@ public class Currency {
         return code;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "Currency{" +
-                "idCurrency=" + idCurrency +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 '}';

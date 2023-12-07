@@ -11,7 +11,7 @@ public class DeviseCrudOperation implements CrudOperation<Currency> {
 
 
     public List<Currency> findAll() {
-        String sql="select * from devise ";
+        String sql="select * from currency";
         List <Currency> currencies =new ArrayList<>();
         try {
             PreparedStatement preparedStatement= ConnectionDB
@@ -20,9 +20,9 @@ public class DeviseCrudOperation implements CrudOperation<Currency> {
             while (resultSet.next()){
                 currencies.add(
                         new Currency(
-                                resultSet.getInt("id_devise"),
-                                resultSet.getString("nom_devise"),
-                                resultSet.getString("code_iso")
+                                resultSet.getInt("id_currency"),
+                                resultSet.getString("name"),
+                                resultSet.getString("code")
                         )
                 );
 
@@ -36,7 +36,7 @@ public class DeviseCrudOperation implements CrudOperation<Currency> {
 
     @Override
     public Currency findById(int id) {
-        String sql="select * from devise where id_devise=?";
+        String sql="select * from devise where id_currency=?";
         Currency currency =null;
         try {
             PreparedStatement preparedStatement= ConnectionDB
@@ -46,9 +46,9 @@ public class DeviseCrudOperation implements CrudOperation<Currency> {
             while (resultSet.next()){
 
                         new Currency(
-                                resultSet.getInt("id_devise"),
-                                resultSet.getString("nom_devise"),
-                                resultSet.getString("code_iso")
+                                resultSet.getInt("id_currency"),
+                                resultSet.getString("name"),
+                                resultSet.getString("code")
                         );
 
 
@@ -61,12 +61,12 @@ public class DeviseCrudOperation implements CrudOperation<Currency> {
 
     @Override
     public Currency save(Currency toSave) {
-        String sql="INSERT INTO devise VALUES" +
+        String sql="INSERT INTO currency VALUES" +
                 "(?,?,?) ON CONFLICT DO NOTHING";
         try{
             PreparedStatement preparedStatement=ConnectionDB.getConnection()
                     .getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setInt(1,toSave.getIdCurrency());
+            preparedStatement.setInt(1,toSave.getId());
             preparedStatement.setString(2,toSave.getName());
             preparedStatement.setString(3,toSave.getCode());
 
@@ -80,40 +80,15 @@ public class DeviseCrudOperation implements CrudOperation<Currency> {
 
     @Override
     public List<Currency> saveAll(List<Currency> toSave) {
-        String sql="INSERT INTO devise VALUES" +
-                "(?,?,?) ON CONFLICT DO NOTHING";
-        try{
-            PreparedStatement preparedStatement=ConnectionDB
-                    .getConnection().getConnectionInstance().prepareStatement(sql);
-           for (Currency currency :toSave){
-               preparedStatement.setInt(1, currency.getIdCurrency());
-               preparedStatement.setString(2, currency.getName());
-               preparedStatement.setString(3, currency.getCode());
-               preparedStatement.addBatch();
-           }
-          int rows[]= preparedStatement.executeBatch();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
+    List<Currency> currencies=new ArrayList<>();
+    for(Currency currency:toSave){
+        currencies.add(save(currency));
+    }
         return toSave;
     }
 
     @Override
     public Currency update(Currency toUpdate) {
-        String sql="update devise set nom_devise=?,code_iso=? where id_devise=?";
-        try {
-            PreparedStatement preparedStatement=ConnectionDB
-                    .getConnection().getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setString(1,toUpdate.getName());
-            preparedStatement.setString(2,toUpdate.getCode());
-            preparedStatement.setInt(3,toUpdate.getIdCurrency());
-
-            preparedStatement.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return findById(toUpdate.getIdCurrency());
+        return null;
     }
 }

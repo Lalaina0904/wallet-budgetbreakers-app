@@ -1,6 +1,7 @@
 import Repository.AccountCrudOperation;
 import Repository.DeviseCrudOperation;
 import Repository.TransactionCrudOperation;
+import Service.TransactionService;
 import entity.Account;
 import entity.Currency;
 import entity.Transaction;
@@ -14,7 +15,7 @@ import java.util.List;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        AccountCrudOperation accountCrudOperation =new AccountCrudOperation();
+       /* AccountCrudOperation accountCrudOperation =new AccountCrudOperation();
         //account crud operation
         System.out.println("=".repeat(50)+"Account CRUD OPERATION"+"=".repeat(50));
 
@@ -34,9 +35,9 @@ public class Main {
        for(Account account : accounts){
            System.out.println(account);
        }
-        System.out.println(accountCrudOperation.findById(2));
+        System.out.println(accountCrudOperation.findById(2));*/
 
-       accountCrudOperation.saveAll(accountsToSave);
+    /*   accountCrudOperation.saveAll(accountsToSave);
        accountCrudOperation.save(account1);
 
 
@@ -82,7 +83,9 @@ public class Main {
         Transaction transactionToUpdate=transactionCrudOperation.update(new Transaction(4,"depense",account1,300,
                 "epargne", java.sql.Date.valueOf("2023-12-04"),java.sql.Time.valueOf("20:45:00")));
 
-        System.out.println(transactionToUpdate);
-
+        System.out.println(transactionToUpdate);*/
+        TransactionService service=new TransactionService();
+       Account account= service.performTransaction(10,"investissement", 3000.0,"credit",1);
+        System.out.println(account);
     }
 }

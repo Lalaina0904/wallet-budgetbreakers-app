@@ -16,13 +16,18 @@ public class ConnectionDB {
         this.username=System.getenv("username");
         this.password=System.getenv("password");
         createConnection();
+
+
     }
     private Connection createConnection() {
         try {
             this.connection= DriverManager.getConnection(this.url,this.username,this.password);
         }
-        catch (Exception e){
+        catch (SQLException e){
             e.printStackTrace();
+        }
+        finally {
+
         }
         return connection;
     }
