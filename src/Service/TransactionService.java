@@ -20,9 +20,9 @@ public class TransactionService {
         Transaction transaction=new Transaction(idTransaction,label,amount,date,type);
 
         Boolean isSaved =transactionCrud.saveTransactionByAccount(transaction,idAccount);
-        List<Transaction> getTransactionsByAccount=transactionCrud.allTransactoinByIdAccount(idAccount);
+        List<Transaction> allTransactionsByAccount=transactionCrud.allTransactoinByIdAccount(idAccount);
         Account account= accountCrudOperation.findById(idAccount);
-        account.setTransactions(getTransactionsByAccount);
+        account.setTransactions(allTransactionsByAccount);
         double newSold=account.getSold();
         Account accountWithNewSold=account;
         if(isSaved){
@@ -35,7 +35,6 @@ public class TransactionService {
                         newSold-=amount;
                         account.setSold(newSold);
                         accountWithNewSold=accountCrudOperation.update(account);
-                        accountWithNewSold.setTransactions(getTransactionsByAccount);
                     }
                 }
 
@@ -44,7 +43,6 @@ public class TransactionService {
                 newSold+=amount;
                 account.setSold(newSold);
                 accountWithNewSold=accountCrudOperation.update(account);
-                accountWithNewSold.setTransactions(getTransactionsByAccount);
             }
         }
 
