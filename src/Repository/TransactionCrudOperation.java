@@ -88,29 +88,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
 
         return toSave;
     }
-public boolean saveTransactionByAccount(Transaction transaction,int idAccount){
-    String sql="INSERT INTO Transaction VALUES" +
-            "(?,?,?,?,?,?) ON CONFLICT DO NOTHING";
-    int saved=0;
-    try{
-        PreparedStatement preparedStatement=ConnectionDB.getConnection()
-                .getConnectionInstance().prepareStatement(sql);
-        preparedStatement.setInt(1,transaction.getId());
-        preparedStatement.setString(2,transaction.getLabel());
-        preparedStatement.setDouble(3,transaction.getAmount());
-        preparedStatement.setTimestamp(4, Timestamp.valueOf(transaction.getDate()));
-        preparedStatement.setString(5,transaction.getType());
-        preparedStatement.setInt(6,idAccount);
 
-
-        saved=preparedStatement.executeUpdate();
-
-    }catch (Exception e){
-        e.printStackTrace();
-
-    }
-return saved!=0;
-}
 public List<Transaction> allTransactoinByIdAccount(int idAccount){
     String sql="select * from Transaction where id_account=?";
     List <Transaction> Transactions=new ArrayList<>();
@@ -164,5 +142,28 @@ public List<Transaction> allTransactoinByIdAccount(int idAccount){
 
         return findById(toUpdate.getId());*/
         return  null;
+    }
+    public boolean saveTransactionByAccount(Transaction transaction,int idAccount){
+        String sql="INSERT INTO Transaction VALUES" +
+                "(?,?,?,?,?,?) ON CONFLICT DO NOTHING";
+        int saved=0;
+        try{
+            PreparedStatement preparedStatement=ConnectionDB.getConnection()
+                    .getConnectionInstance().prepareStatement(sql);
+            preparedStatement.setInt(1,transaction.getId());
+            preparedStatement.setString(2,transaction.getLabel());
+            preparedStatement.setDouble(3,transaction.getAmount());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(transaction.getDate()));
+            preparedStatement.setString(5,transaction.getType());
+            preparedStatement.setInt(6,idAccount);
+
+
+            saved=preparedStatement.executeUpdate();
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return saved!=0;
     }
 }

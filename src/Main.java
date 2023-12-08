@@ -84,5 +84,9 @@ public class Main {
         BalanceHistory balanceHistory=new BalanceHistory();
         LocalDateTime dateTime= LocalDateTime.of(2023,12,6,6,30);
         System.out.println(balanceHistory.getSoldByDate(2,dateTime));
+
+        LocalDateTime beginDateTime=LocalDateTime.of(2023,12,6,7,30);
+        LocalDateTime endDateTime=LocalDateTime.of(2023,12,7,10,30);
+        System.out.println( balanceHistory.accountBalanceHistory(1,beginDateTime,endDateTime));
     }
 }

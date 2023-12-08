@@ -270,20 +270,30 @@ components:
     Account:
       type: object
       properties:
-        idAccount:
+        id:
           type: string
-        accountName:
+        Name:
           type: string
-        accountType:
-          type: string
+        sold:
+          type: number
+        Transactions:
+          type: array
+          items:
+              $ref: '#/components/schemas/Transaction'
         currency:
           $ref: '#/components/schemas/Currency'
+        Type:
+          enum:
+            - bank
+            - cash
+            - mobile money
+        
           
             
     Currency:
       type: object
       properties:
-        idCurrency:
+        id:
           type: string
         code:
           type: string
@@ -292,19 +302,19 @@ components:
     Transaction:
       type: object
       properties:
-        idTransacton: 
+        id: 
+          type: string
+        label:
           type: string
         amount: 
           type: number
-        account: 
-          $ref: '#/components/schemas/Account'
-
-        transactionDate:
+        transactionDate:  
           type: string
           format: date
-
-        category:
-          type: string
+        Type:
+          enum:
+            - credit
+            - debit
     responseStatus:
       type: object
       properties:
