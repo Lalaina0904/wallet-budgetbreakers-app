@@ -46,4 +46,14 @@ public class TransferHistory {
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
+
+    @Override
+    public String toString() {
+        return "TransferHistory{" +
+                "id=" + id +
+                ", idTransactionDebitor=" + idTransactionDebitor +
+                ", idTransactionCreditor=" + idTransactionCreditor +
+                ", dateTime=" + dateTime +
+                '}';
+    }
 }

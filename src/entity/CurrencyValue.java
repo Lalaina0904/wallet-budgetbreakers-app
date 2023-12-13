@@ -38,4 +38,15 @@ public class CurrencyValue {
     public LocalDate getDate() {
         return Date;
     }
+
+    @Override
+    public String toString() {
+        return "CurrencyValue{" +
+                "idCurrencyValue=" + idCurrencyValue +
+                ", idCurrencySource=" + idCurrencySource +
+                ", idCurrencyDestination=" + idCurrencyDestination +
+                ", amount=" + amount +
+                ", Date=" + Date +
+                '}';
+    }
 }
