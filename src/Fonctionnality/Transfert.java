@@ -56,4 +56,7 @@ public class Transfert {
         List<TransferHistory> histories= transfertHistoryOperation.findByGivenDate(startDate,endDate);
         return histories;
     }
+
+
+    //a method to get
 }

@@ -18,7 +18,7 @@ public class CurrencyValueOperation {
     String valueColumn="value";
     String dateColumn="date";
     public  CurrencyValue  getLastCurrencyValue(){
-        String sql="select * from currency_value order by date DESC limit=1";
+        String sql="select * from currency_value order by date DESC limit 1";
         CurrencyValue currencyValue=null;
       try {
           Statement statement=connection.createStatement();
