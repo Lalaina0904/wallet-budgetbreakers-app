@@ -1,21 +1,22 @@
 package Fonctionnality;
 
-import Repository.AccountCrudOperation;
-import Repository.CurrencyValueOperation;
-import Repository.TransfertHisoruCrudOperation;
+import Repository.*;
 import entity.Account;
 import entity.CurrencyValue;
 import entity.TransferHistory;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class Transfert {
 
     AccountCrudOperation accountCrudOperation=new AccountCrudOperation();
     TransactionAccount transaction=new TransactionAccount();
-    TransfertHisoruCrudOperation transfertHisoruCrudOperation=new TransfertHisoruCrudOperation();
     CurrencyValueOperation currencyValueOperation=new CurrencyValueOperation();
+
+    TransfertHistoryOperation transfertHistoryOperation=new TransfertHistoryOperation();
+    //a method to transfert moneu
     public void transfertMoney(int idTransert,int idAccountSource,int idAccountReceiver,Double amount,int idTransactionCreditor,int idTransactionDebitor){
 
         if(idAccountSource==idAccountReceiver )
@@ -45,6 +46,14 @@ public class Transfert {
 
 
         TransferHistory transferHistory=new TransferHistory(idTransert,idTransactionDebitor,idTransactionCreditor,dateTime);
-        transfertHisoruCrudOperation.save(transferHistory);
+        transfertHistoryOperation.save(transferHistory);
+    }
+
+
+
+    //a method to get the transfert history on a given date
+    public List<TransferHistory> getTransfertHistory(LocalDateTime startDate,LocalDateTime endDate){
+        List<TransferHistory> histories= transfertHistoryOperation.findByGivenDate(startDate,endDate);
+        return histories;
     }
 }
