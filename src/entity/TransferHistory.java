@@ -5,14 +5,22 @@ import java.time.LocalDateTime;
 public class TransferHistory {
    private int id;
    private int idTransactionDebitor;
+
    private int idTransactionCreditor;
+    private double amount;
    private LocalDateTime dateTime;
 
-    public TransferHistory(int id, int idTransactionDebitor, int idTransactionCreditor, LocalDateTime dateTime) {
+
+    public TransferHistory(int id, int idTransactionDebitor, int idTransactionCreditor, double amount, LocalDateTime dateTime) {
         this.id = id;
         this.idTransactionDebitor = idTransactionDebitor;
         this.idTransactionCreditor = idTransactionCreditor;
+        this.amount = amount;
         this.dateTime = dateTime;
+    }
+
+    public double getAmount() {
+        return amount;
     }
 
     public int getId() {
@@ -52,6 +60,7 @@ public class TransferHistory {
         return "TransferHistory{" +
                 "id=" + id +
                 ", idTransactionDebitor=" + idTransactionDebitor +
+                ", amount=" + amount +
                 ", idTransactionCreditor=" + idTransactionCreditor +
                 ", dateTime=" + dateTime +
                 '}';

@@ -1,7 +1,12 @@
 package Fonctionnality;
 
+import Repository.AccountCrudOperation;
+import Repository.CurrencyValueOperation;
 import Repository.TransactionCrudOperation;
+import Repository.TransfertHistoryOperation;
+import entity.CurrencyValue;
 import entity.Transaction;
+import entity.TransferHistory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,4 +51,22 @@ public class BalanceHistory {
         }
     return allSold;
     }
+
+// the current sold of the account which receives transfert
+    TransfertHistoryOperation transfert=new TransfertHistoryOperation();
+    CurrencyValueOperation currencyValueOperation=new CurrencyValueOperation();
+    public double receveirAccountCurrentSold(int idAccountReceiver){
+       List<TransferHistory> transferHistories=transfert.getTransfertHistoryByIdCreditor(idAccountReceiver);
+        AccountCrudOperation account=new AccountCrudOperation();
+       Double totalSold= getSoldByDate(idAccountReceiver,LocalDateTime.now());
+        for(TransferHistory transferHistory:transferHistories){
+           LocalDateTime transfertDate= transferHistory.getDateTime();
+          double CurrencyValueAmount=currencyValueOperation.getByDate(transfertDate).getAmount();
+          double convertedSold=CurrencyValueAmount*transferHistory.getAmount();
+
+          totalSold+=convertedSold;
+        }
+        return totalSold;
+    }
+
 }

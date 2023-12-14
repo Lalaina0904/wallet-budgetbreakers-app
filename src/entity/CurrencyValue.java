@@ -9,14 +9,14 @@ public class CurrencyValue {
     int idCurrencySource;
     int idCurrencyDestination;
     Double amount;
-    LocalDate Date;
+    LocalDateTime Date;
 
-    public CurrencyValue(int idCurrencyValue, int idCurrencySource, int idCurrencyDestination, Double amount, LocalDate date) {
+    public CurrencyValue(int idCurrencyValue, int idCurrencySource, int idCurrencyDestination, Double amount, LocalDateTime date) {
         this.idCurrencyValue = idCurrencyValue;
         this.idCurrencySource = idCurrencySource;
         this.idCurrencyDestination = idCurrencyDestination;
         this.amount = amount;
-        Date = date;
+        this.Date = date;
     }
 
     public int getIdCurrencyValue() {
@@ -35,7 +35,7 @@ public class CurrencyValue {
         return amount;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return Date;
     }
 

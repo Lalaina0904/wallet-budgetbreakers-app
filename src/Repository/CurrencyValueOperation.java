@@ -3,11 +3,10 @@ package Repository;
 import entity.Account;
 import entity.CurrencyValue;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 public class CurrencyValueOperation {
@@ -31,7 +30,7 @@ public class CurrencyValueOperation {
                               resultSet.getInt(idCurrencySourceColumn),
                               resultSet.getInt(idCurrencyDestinationColumn),
                               resultSet.getDouble(idCurrencyValueColumn),
-                              resultSet.getDate(dateColumn).toLocalDate()
+                              resultSet.getTimestamp(dateColumn).toLocalDateTime()
                       );
 
           }
@@ -40,5 +39,32 @@ public class CurrencyValueOperation {
           e.printStackTrace();
       }
       return currencyValue;
+    }
+
+
+
+    public CurrencyValue getByDate(LocalDateTime date){
+        String sql="select * from currency_value where date=?";
+        CurrencyValue currencyValues=null;
+        try {
+            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(date));
+            ResultSet resultSet= preparedStatement.executeQuery();
+            while (resultSet.next()){
+                        new CurrencyValue(
+
+                                resultSet.getInt(idCurrencyValueColumn),
+                                resultSet.getInt(idCurrencySourceColumn),
+                                resultSet.getInt(idCurrencyDestinationColumn),
+                                resultSet.getDouble(idCurrencyValueColumn),
+                                resultSet.getTimestamp(dateColumn).toLocalDateTime()
+                        );
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return currencyValues;
     }
 }

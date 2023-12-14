@@ -17,7 +17,7 @@ public class Transfert {
 
     TransfertHistoryOperation transfertHistoryOperation=new TransfertHistoryOperation();
     //a method to transfert moneu
-    public void transfertMoney(int idTransert,int idAccountSource,int idAccountReceiver,Double amount,int idTransactionCreditor,int idTransactionDebitor){
+    public void transfertMoney(int idTransert,int idAccountSource,int idAccountReceiver,double amount,int idTransactionCreditor,int idTransactionDebitor){
 
         if(idAccountSource==idAccountReceiver )
             return;
@@ -45,18 +45,21 @@ public class Transfert {
         }
 
 
-        TransferHistory transferHistory=new TransferHistory(idTransert,idTransactionDebitor,idTransactionCreditor,dateTime);
+        TransferHistory transferHistory=new TransferHistory(idTransert,idTransactionDebitor,idTransactionCreditor,amount,dateTime);
         transfertHistoryOperation.save(transferHistory);
     }
 
 
 
-    //a method to get the transfert history on a given date
+
+
+    //a method to get the transfert history on a given interval of date
     public List<TransferHistory> getTransfertHistory(LocalDateTime startDate,LocalDateTime endDate){
         List<TransferHistory> histories= transfertHistoryOperation.findByGivenDate(startDate,endDate);
         return histories;
     }
 
 
-    //a method to get
+    //a method to get sold of the account receiever
+
 }
