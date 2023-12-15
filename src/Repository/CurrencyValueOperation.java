@@ -72,7 +72,7 @@ public class CurrencyValueOperation {
         return currencyValue;
     }
     public List<CurrencyValue> groupByDate(LocalDate date){
-        String sql = "select * from currency_value where DATE_TRUNC('day', timestamp_column) = DATE_TRUNC('day', ?)";
+        String sql = "SELECT * FROM currency_value WHERE DATE_TRUNC('day', date::DATE) = DATE_TRUNC('day', ?::DATE)";
         Timestamp timestamp = Timestamp.valueOf(date.atStartOfDay());
         List<CurrencyValue> currencyValuesByDate=new ArrayList<>();
         try {

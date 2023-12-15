@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionCrudOperation implements CrudOperation<Transaction>{
+public class TransactionCrudOperation{
        String idColumn="id";
         String labelColumn="label";
         String amountColumn="amount";
@@ -16,7 +16,6 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
         String transactionTypeColumn="transaction_type";
         String idCategoryColumn="id_category";
 
-    @Override
     public List<Transaction> findAll() {
         String sql="select * from Transaction ";
         List <Transaction> Transactions=new ArrayList<>();
@@ -45,7 +44,6 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
         return Transactions;
     }
 
-    @Override
     public Transaction findById(int id) {
         String sql="select * from Transaction ";
         Transaction transaction=null;
@@ -75,10 +73,9 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
         return transaction;
     }
 
-    @Override
     public Transaction save(Transaction toSave) {
         String sql="INSERT INTO Transaction VALUES" +
-                "(?,?,?,?,?,?) ON CONFLICT DO NOTHING";
+                "(?,?,?,?,?,?,?) ON CONFLICT DO NOTHING";
         try{
             PreparedStatement preparedStatement=ConnectionDB.getConnection()
                     .getConnectionInstance().prepareStatement(sql);
@@ -87,7 +84,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
            preparedStatement.setDouble(3,toSave.getAmount());
            preparedStatement.setTimestamp(5, Timestamp.valueOf(toSave.getDate()));
            preparedStatement.setInt(6,toSave.getCategory());
-
+            preparedStatement.setInt(7,toSave.getCategory());
 
             int rows=preparedStatement.executeUpdate();
 
@@ -126,7 +123,7 @@ public List<Transaction> allTransactoinByIdAccount(int idAccount){
     }
     return Transactions;
 }
-    @Override
+
     public List<Transaction> saveAll(List<Transaction> toSave) {
         List <Transaction> transactions=new ArrayList<>();
         for(Transaction transaction:toSave)
@@ -134,14 +131,10 @@ public List<Transaction> allTransactoinByIdAccount(int idAccount){
         return transactions;
     }
 
-    @Override
-    public Transaction update(Transaction toUpdate) {
 
-        return  null;
-    }
     public boolean saveTransactionByAccount(Transaction transaction,int idAccount){
         String sql="INSERT INTO Transaction VALUES" +
-                "(?,?,?,?,?,?) ON CONFLICT DO NOTHING";
+                "(?,?,?,?,?,?,?) ON CONFLICT DO NOTHING";
         int saved=0;
         try{
             PreparedStatement preparedStatement=ConnectionDB.getConnection()
@@ -152,6 +145,7 @@ public List<Transaction> allTransactoinByIdAccount(int idAccount){
             preparedStatement.setTimestamp(4, Timestamp.valueOf(transaction.getDate()));
             preparedStatement.setString(5,transaction.getType());
             preparedStatement.setInt(6,idAccount);
+            preparedStatement.setInt(7,transaction.getCategory());
 
 
             saved=preparedStatement.executeUpdate();

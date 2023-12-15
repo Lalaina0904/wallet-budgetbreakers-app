@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         TransactionAccount service=new TransactionAccount();
-       Account account= service.performTransaction(10,"investissement", 3000.0,"credit",1);
+       Account account= service.performTransaction(10,"investissement", 3000.0,"credit",1,2);
         System.out.println(account);
 
         BalanceHistory balanceHistory=new BalanceHistory();
