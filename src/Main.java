@@ -4,6 +4,7 @@ import entity.Account;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -37,17 +38,20 @@ LocalDateTime dateTim=LocalDateTime.now();
        System.out.println(currencyValueOperation.getByDate(dateTim));;
 
 
-
+        System.out.println("\n"+"=".repeat(30)+"Function mapped from the database");
         MapSQLFunction mapSQLFunction =new MapSQLFunction();
-        LocalDate startDate=LocalDate.of(2023,12,30);
+        LocalDate startDate=LocalDate.of(2023,12,15);
         LocalDate endDate=LocalDate.of(2023,12,31);
         System.out.println( mapSQLFunction.entryAndExpenseSum(1,startDate,endDate));
         System.out.println(mapSQLFunction.categorieTotalAmount(1,startDate,endDate
         ));
-
+        System.out.println("\n"+"=".repeat(30)+"funcation created in java");
         EntryExpenseSum entryExpenseSum=new EntryExpenseSum();
         System.out.println(entryExpenseSum.EntryExpenseAmountSum(1,startDate,endDate));
        // System.out.println(balanceHistory.receveirAccountCurrentSold(2));
+         entryExpenseSum.amountSumByCategory(1,startDate,endDate).forEach((idCategory, sum) ->{
+             System.out.println("\nidCategory="+idCategory+" sum="+sum);
+         });
     }
 
 
