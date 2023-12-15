@@ -17,7 +17,7 @@ public class Transfert {
 
     TransfertHistoryOperation transfertHistoryOperation=new TransfertHistoryOperation();
     //a method to transfert moneu
-    public void transfertMoney(int idTransert,int idAccountSource,int idAccountReceiver,double amount,int idTransactionCreditor,int idTransactionDebitor){
+    public void transfertMoney(int idTransert,int idAccountSource,int idAccountReceiver,double amount,int idTransactionCreditor,int idTransactionDebitor,int category){
 
         if(idAccountSource==idAccountReceiver )
             return;
@@ -30,8 +30,8 @@ public class Transfert {
         //check if the currencies are equals
         if(senderCurrencyCode.equals(receveirCurrencyCode)){
 
-            transaction.performTransaction(idTransactionDebitor,"transfert",amount,"debit",idAccountSource);
-            transaction.performTransaction(idTransactionCreditor,"transfert",amount,"credit",idAccountReceiver);
+            transaction.performTransaction(idTransactionDebitor,"transfert",amount,"debit",idAccountSource,category);
+            transaction.performTransaction(idTransactionCreditor,"transfert",amount,"credit",idAccountReceiver,category);
 
 
         }
@@ -40,8 +40,8 @@ public class Transfert {
            CurrencyValue lastCurrecy= currencyValueOperation.getLastCurrencyValue();
 
             double convertedAmount=lastCurrecy.getAmount()*amount;
-            transaction.performTransaction(idTransactionCreditor,"transfert",convertedAmount,"credit",idAccountReceiver);
-            transaction.performTransaction(idTransactionDebitor,"transfert",amount,"debit",idAccountSource);
+            transaction.performTransaction(idTransactionCreditor,"transfert",convertedAmount,"credit",idAccountReceiver,category);
+            transaction.performTransaction(idTransactionDebitor,"transfert",amount,"debit",idAccountSource,category);
         }
 
 
