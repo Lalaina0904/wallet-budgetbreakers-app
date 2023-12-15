@@ -1,8 +1,12 @@
 import Fonctionnality.BalanceHistory;
+import Fonctionnality.CurrencyValueFunctionality;
 import Fonctionnality.TransactionAccount;
 import Fonctionnality.Transfert;
+import Repository.CurrencyValueOperation;
 import entity.Account;
+import entity.CurrencyValue;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -28,7 +32,17 @@ public class Main {
         transfert.transfertMoney(3,1,2,500.0,17,18);
         transfert.transfertMoney(4,1,2,100.0,19,20);
         System.out.println( transfert.getTransfertHistory(beginDateTime,endDateTime));
+
+        CurrencyValueFunctionality currencyValueFunctionality=new CurrencyValueFunctionality();
+        LocalDate date= LocalDate.of(2023, 12, 13);
+        System.out.println(currencyValueFunctionality.getCalculatedCurrencyByDate(date,"average"));
+LocalDateTime dateTim=LocalDateTime.now();
+        CurrencyValueOperation currencyValueOperation=new CurrencyValueOperation();
+       System.out.println(currencyValueOperation.getByDate(dateTim));;
         System.out.println(balanceHistory.receveirAccountCurrentSold(2));
+
     }
+
+
 
 }

@@ -10,15 +10,22 @@ public class Transaction {
     private int id;
     private String label;
     private double amount;
-    LocalDateTime Date;
+   private LocalDateTime Date;
     private String type;
+    private int category;
 
-    public Transaction(int id, String label, double amount, LocalDateTime date, String type) {
+
+    public Transaction(int id, String label, double amount, LocalDateTime date, String type, int category) {
         this.id = id;
         this.label = label;
         this.amount = amount;
         Date = date;
         this.type = type;
+        this.category = category;
+    }
+
+    public int getCategory() {
+        return category;
     }
 
     public int getId() {

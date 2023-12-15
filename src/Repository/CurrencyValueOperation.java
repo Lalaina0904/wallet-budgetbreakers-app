@@ -47,12 +47,14 @@ public class CurrencyValueOperation {
 
     public CurrencyValue getByDate(LocalDateTime date){
         String sql="select * from currency_value where date=?";
-        CurrencyValue currencyValues=null;
+
+        CurrencyValue currencyValue=null;
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setTimestamp(1, Timestamp.valueOf(date));
             ResultSet resultSet= preparedStatement.executeQuery();
             while (resultSet.next()){
+                currencyValue=
                         new CurrencyValue(
 
                                 resultSet.getInt(idCurrencyValueColumn),
@@ -67,7 +69,7 @@ public class CurrencyValueOperation {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return currencyValues;
+        return currencyValue;
     }
     public List<CurrencyValue> groupByDate(LocalDate date){
         String sql = "select * from currency_value where DATE_TRUNC('day', timestamp_column) = DATE_TRUNC('day', ?)";
