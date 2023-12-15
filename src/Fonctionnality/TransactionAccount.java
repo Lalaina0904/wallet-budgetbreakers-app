@@ -11,10 +11,10 @@ import java.util.List;
 public class TransactionAccount {
     TransactionCrudOperation transactionCrud=new TransactionCrudOperation();
     AccountCrudOperation accountCrudOperation=new AccountCrudOperation();
-    public Account performTransaction(int idTransaction,String label,Double amount,String type,int idAccount){
+    public Account performTransaction(int idTransaction,String label,Double amount,String type,int idAccount,int category){
         LocalDateTime date=LocalDateTime.now() ;
 
-        Transaction transaction=new Transaction(idTransaction,label,amount,date,type);
+        Transaction transaction=new Transaction(idTransaction,label,amount,date,type,category);
 
         Boolean isSaved =transactionCrud.saveTransactionByAccount(transaction,idAccount);
         List<Transaction> allTransactionsByAccount=transactionCrud.allTransactoinByIdAccount(idAccount);

@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionCrudOperation implements CrudOperation<Transaction>{
+       String idColumn="id";
+        String labelColumn="label";
+        String amountColumn="amount";
+        String transactionDateColumn="transaction_date";
+        String transactionTypeColumn="transaction_type";
+        String idCategoryColumn="id_category";
 
     @Override
     public List<Transaction> findAll() {
@@ -22,11 +28,12 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
             while (resultSet.next()){
                 Transactions.add(
                         new Transaction(
-                             resultSet.getInt("id"),
-                                resultSet.getString("label"),
-                                resultSet.getDouble("amount"),
-                                resultSet.getTimestamp("transaction_date").toLocalDateTime(),
-                                resultSet.getString("transaction_type")
+                             resultSet.getInt(idColumn),
+                                resultSet.getString(labelColumn),
+                                resultSet.getDouble(amountColumn),
+                                resultSet.getTimestamp(transactionDateColumn).toLocalDateTime(),
+                                resultSet.getString(transactionTypeColumn),
+                                resultSet.getInt(idCategoryColumn)
                         )
                 );
 
@@ -50,11 +57,12 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
             while (resultSet.next()){
 
                 transaction=new Transaction(
-                        resultSet.getInt("id"),
-                        resultSet.getString("label"),
-                        resultSet.getDouble("amount"),
-                        resultSet.getTimestamp("transaction_date").toLocalDateTime(),
-                        resultSet.getString("transaction_type")
+                        resultSet.getInt(idColumn),
+                        resultSet.getString(labelColumn),
+                        resultSet.getDouble(amountColumn),
+                        resultSet.getTimestamp(transactionDateColumn).toLocalDateTime(),
+                        resultSet.getString(transactionTypeColumn),
+                        resultSet.getInt(idCategoryColumn)
 
                 );
 
@@ -78,6 +86,7 @@ public class TransactionCrudOperation implements CrudOperation<Transaction>{
            preparedStatement.setString(2,toSave.getLabel());
            preparedStatement.setDouble(3,toSave.getAmount());
            preparedStatement.setTimestamp(5, Timestamp.valueOf(toSave.getDate()));
+           preparedStatement.setInt(6,toSave.getCategory());
 
 
             int rows=preparedStatement.executeUpdate();
@@ -101,11 +110,12 @@ public List<Transaction> allTransactoinByIdAccount(int idAccount){
         while (resultSet.next()){
             Transactions.add(
                     new Transaction(
-                            resultSet.getInt("id"),
-                            resultSet.getString("label"),
-                            resultSet.getDouble("amount"),
-                            resultSet.getTimestamp("transaction_date").toLocalDateTime(),
-                            resultSet.getString("transaction_type")
+                            resultSet.getInt(idColumn),
+                            resultSet.getString(labelColumn),
+                            resultSet.getDouble(amountColumn),
+                            resultSet.getTimestamp(transactionDateColumn).toLocalDateTime(),
+                            resultSet.getString(transactionTypeColumn),
+                            resultSet.getInt(idCategoryColumn)
                     )
             );
 
@@ -126,21 +136,7 @@ public List<Transaction> allTransactoinByIdAccount(int idAccount){
 
     @Override
     public Transaction update(Transaction toUpdate) {
-       /* String sql="update Transaction set type=?,montant=?,categorie=? where id=?";
-        try {
-            PreparedStatement preparedStatement=ConnectionDB
-                    .getConnection().getConnectionInstance().prepareStatement(sql);
-            preparedStatement.setString(1,toUpdate.getType());
-            preparedStatement.setDouble(2,toUpdate.getAmount());
-            preparedStatement.setString(3,toUpdate.getCategory());
-            preparedStatement.setInt(4,toUpdate.getId());
 
-            preparedStatement.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return findById(toUpdate.getId());*/
         return  null;
     }
     public boolean saveTransactionByAccount(Transaction transaction,int idAccount){
