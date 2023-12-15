@@ -21,3 +21,6 @@ select 2,'investissemnt',1000,CURRENT_TIMESTAMP,'credit',2,3 WHERE NOT EXISTS(
 select 1 from transaction where id=2
 );
 
+
+
+

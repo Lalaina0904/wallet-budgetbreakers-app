@@ -29,3 +29,8 @@ SELECT 4, 'loisirs'
     WHERE NOT EXISTS (
     SELECT 1 FROM category WHERE id_category = 4 AND category_type = 'loisirs'
 );
+INSERT INTO category (id_category, category_type)
+SELECT 5, 'other'
+    WHERE NOT EXISTS (
+    SELECT 1 FROM category WHERE id_category = 5 AND category_type = 'other'
+);
