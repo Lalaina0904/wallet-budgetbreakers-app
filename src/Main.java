@@ -39,10 +39,14 @@ LocalDateTime dateTim=LocalDateTime.now();
 
 
         MapSQLFunction mapSQLFunction =new MapSQLFunction();
-        LocalDate startDate=LocalDate.of(2023,12,10);
+        LocalDate startDate=LocalDate.of(2023,12,30);
         LocalDate endDate=LocalDate.of(2023,12,31);
         System.out.println( mapSQLFunction.entryAndExpenseSum(1,startDate,endDate));
-        System.out.println(mapSQLFunction.categorieTotalAmount(1,startDate,endDate));
+        System.out.println(mapSQLFunction.categorieTotalAmount(1,startDate,endDate
+        ));
+
+        EntryExpenseSum entryExpenseSum=new EntryExpenseSum();
+        System.out.println(entryExpenseSum.EntryExpenseAmountSum(1,startDate,endDate));
        // System.out.println(balanceHistory.receveirAccountCurrentSold(2));
     }
 
