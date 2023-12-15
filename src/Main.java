@@ -1,10 +1,6 @@
-import Fonctionnality.BalanceHistory;
-import Fonctionnality.CurrencyValueFunctionality;
-import Fonctionnality.TransactionAccount;
-import Fonctionnality.Transfert;
+import Fonctionnality.*;
 import Repository.CurrencyValueOperation;
 import entity.Account;
-import entity.CurrencyValue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,8 +35,15 @@ public class Main {
 LocalDateTime dateTim=LocalDateTime.now();
         CurrencyValueOperation currencyValueOperation=new CurrencyValueOperation();
        System.out.println(currencyValueOperation.getByDate(dateTim));;
-        System.out.println(balanceHistory.receveirAccountCurrentSold(2));
 
+
+
+        MapSQLFunction mapSQLFunction =new MapSQLFunction();
+        LocalDate startDate=LocalDate.of(2023,12,10);
+        LocalDate endDate=LocalDate.of(2023,12,31);
+        System.out.println( mapSQLFunction.entryAndExpenseSum(1,startDate,endDate));
+        System.out.println(mapSQLFunction.categorieTotalAmount(1,startDate,endDate));
+       // System.out.println(balanceHistory.receveirAccountCurrentSold(2));
     }
 
 
